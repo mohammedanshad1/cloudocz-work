@@ -1,5 +1,5 @@
 import 'package:cloudoczwork/constants/app_colors.dart';
-import 'package:cloudoczwork/screens/homepage.dart';
+import 'package:cloudoczwork/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // For controlling status bar color
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: CourseListingPage(),
+          home: SplashScreen(), // Start with SplashScreen
         );
       },
     );
