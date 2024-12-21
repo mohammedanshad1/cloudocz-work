@@ -2,6 +2,7 @@ import 'package:cloudoczwork/widgets/ongoing_course.dart';
 import 'package:cloudoczwork/widgets/saved_course_card.dart';
 import 'package:cloudoczwork/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class CourseListingPage extends StatelessWidget {
@@ -57,17 +58,17 @@ class CourseListingPage extends StatelessWidget {
         slivers: [
           CustomAPPBAR(),
           SliverPadding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.r), // Responsive padding
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h), // Responsive spacing
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Ongoing Courses',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp, // Responsive font size
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -75,15 +76,15 @@ class CourseListingPage extends StatelessWidget {
                     Text(
                       'View All',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp, // Responsive font size
                         color: HexColor('B6B4B7'),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h), // Responsive spacing
                 SizedBox(
-                  height: 160,
+                  height: 180.h, // Responsive height
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: ongoingCourses.length,
@@ -100,14 +101,14 @@ class CourseListingPage extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: 25),
+                SizedBox(height: 25.h), // Responsive spacing
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Saved Courses',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp, // Responsive font size
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -115,15 +116,15 @@ class CourseListingPage extends StatelessWidget {
                     Text(
                       'View All',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp, // Responsive font size
                         color: HexColor('B6B4B7'),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h), // Responsive spacing
                 SizedBox(
-                  height: 300,
+                  height: 300.h, // Responsive height
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: savedCourses.length,
@@ -141,7 +142,7 @@ class CourseListingPage extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h), // Responsive spacing
               ]),
             ),
           ),

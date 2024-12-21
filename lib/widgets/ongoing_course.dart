@@ -1,5 +1,6 @@
 import 'package:cloudoczwork/constants/app_typography.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class OngoingCourseCard extends StatelessWidget {
@@ -23,93 +24,97 @@ class OngoingCourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 16),
-      width: MediaQuery.of(context).size.width * 0.75,
+      margin: EdgeInsets.only(right: 16.w),
+      height: 280.h,
+      width: 0.75.sw, // Responsive width
       decoration: BoxDecoration(
         color: HexColor(color),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
       ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
+      padding: EdgeInsets.all(16.w),
+      child: SingleChildScrollView(
+        // Added ScrollView for overflow handling
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 40.w,
+                  height: 40.w,
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Image.asset(
+                    image,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.contain,
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: AppTypography.outfitLight.copyWith(
+                          fontSize: 16.sp, // Responsive font size
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 4.h),
+                      Text(
+                        instructor,
+                        style: AppTypography.outfitExtraLight.copyWith(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+              ],
+            ),
+            SizedBox(height: 12.h),
+            Text(
+              description,
+              style: AppTypography.outfitExtraLight.copyWith(
+                fontSize: 12.sp,
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            SizedBox(height: 12.h), // Added some space to prevent overflow
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 8.h),
+                LinearProgressIndicator(
+                  value: progress,
+                  backgroundColor: Colors.white.withOpacity(0.2),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                  minHeight: 4.h,
+                ),
+                SizedBox(height: 4.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end, // Changed to start
                   children: [
                     Text(
-                      title,
-                      style: AppTypography.outfitLight.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      instructor,
+                      '${(progress * 60).toInt()} min left',
                       style: AppTypography.outfitExtraLight.copyWith(
-                        fontSize: 12,
+                        fontSize: 12.sp,
+                        color: Colors.white, // Ensure the text is visible
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            description,
-            style: AppTypography.outfitExtraLight.copyWith(
-              fontSize: 12,
+              ],
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              LinearProgressIndicator(
-                value: progress,
-                backgroundColor: Colors.white.withOpacity(0.2),
-                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-                minHeight: 4,
-                borderRadius: BorderRadius.circular(2),
-              ),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    '${(progress * 60).toInt()} min left',
-                    style: AppTypography.outfitExtraLight.copyWith(
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

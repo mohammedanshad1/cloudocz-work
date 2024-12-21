@@ -6,6 +6,7 @@ class AppColors {
 
   static  Color primaryColor = HexColor('2e2461');
   
+
   
 
 }
