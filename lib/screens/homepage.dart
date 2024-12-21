@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloudoczwork/widgets/ongoing_course.dart';
 import 'package:cloudoczwork/widgets/saved_course_card.dart';
 import 'package:cloudoczwork/widgets/appbar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:cloudoczwork/constants/app_colors.dart';
 
 class CourseListingPage extends StatelessWidget {
   CourseListingPage({Key? key}) : super(key: key);
@@ -53,100 +53,102 @@ class CourseListingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor('FCFAFF'),
-      body: CustomScrollView(
-        slivers: [
-          CustomAPPBAR(),
-          SliverPadding(
-            padding: EdgeInsets.all(16.r), // Responsive padding
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                SizedBox(height: 20.h), // Responsive spacing
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Ongoing Courses',
-                      style: TextStyle(
-                        fontSize: 18.sp, // Responsive font size
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+      backgroundColor: AppColors.backgroundColor,  // Using AppColors
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            CustomAPPBAR(),
+            SliverPadding(
+              padding: EdgeInsets.all(16.r), // Responsive padding
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  SizedBox(height: 20.h), // Responsive spacing
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Ongoing Courses',
+                        style: TextStyle(
+                          fontSize: 18.sp, // Responsive font size
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textColor, // Using AppColors
+                        ),
                       ),
-                    ),
-                    Text(
-                      'View All',
-                      style: TextStyle(
-                        fontSize: 14.sp, // Responsive font size
-                        color: HexColor('B6B4B7'),
+                      Text(
+                        'View All',
+                        style: TextStyle(
+                          fontSize: 14.sp, // Responsive font size
+                          color: AppColors.grayColor, // Using AppColors
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.h), // Responsive spacing
-                SizedBox(
-                  height: 180.h, // Responsive height
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: ongoingCourses.length,
-                    itemBuilder: (context, index) {
-                      final course = ongoingCourses[index];
-                      return OngoingCourseCard(
-                        title: course['title']!,
-                        instructor: course['instructor']!,
-                        description: course['description']!,
-                        progress: course['progress'],
-                        image: course['image']!,
-                        color: course['color']!,
-                      );
-                    },
+                    ],
                   ),
-                ),
-                SizedBox(height: 25.h), // Responsive spacing
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Saved Courses',
-                      style: TextStyle(
-                        fontSize: 18.sp, // Responsive font size
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                  SizedBox(height: 16.h), // Responsive spacing
+                  SizedBox(
+                    height: 180.h, // Responsive height
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: ongoingCourses.length,
+                      itemBuilder: (context, index) {
+                        final course = ongoingCourses[index];
+                        return OngoingCourseCard(
+                          title: course['title']!,
+                          instructor: course['instructor']!,
+                          description: course['description']!,
+                          progress: course['progress'],
+                          image: course['image']!,
+                          color: course['color']!,
+                        );
+                      },
                     ),
-                    Text(
-                      'View All',
-                      style: TextStyle(
-                        fontSize: 14.sp, // Responsive font size
-                        color: HexColor('B6B4B7'),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.h), // Responsive spacing
-                SizedBox(
-                  height: 300.h, // Responsive height
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: savedCourses.length,
-                    itemBuilder: (context, index) {
-                      final course = savedCourses[index];
-                      return SavedCourseCard(
-                        title: course['title']!,
-                        duration: course['duration']!,
-                        lessons: course['lessons']!,
-                        rating: course['rating']!,
-                        price: course['price']!,
-                        image: course['image']!,
-                        enrolled: course['enrolled']!,
-                      );
-                    },
                   ),
-                ),
-                SizedBox(height: 24.h), // Responsive spacing
-              ]),
+                  SizedBox(height: 25.h), // Responsive spacing
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Saved Courses',
+                        style: TextStyle(
+                          fontSize: 18.sp, // Responsive font size
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textColor, // Using AppColors
+                        ),
+                      ),
+                      Text(
+                        'View All',
+                        style: TextStyle(
+                          fontSize: 14.sp, // Responsive font size
+                          color: AppColors.grayColor, // Using AppColors
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h), // Responsive spacing
+                  SizedBox(
+                    height: 300.h, // Responsive height
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: savedCourses.length,
+                      itemBuilder: (context, index) {
+                        final course = savedCourses[index];
+                        return SavedCourseCard(
+                          title: course['title']!,
+                          duration: course['duration']!,
+                          lessons: course['lessons']!,
+                          rating: course['rating']!,
+                          price: course['price']!,
+                          image: course['image']!,
+                          enrolled: course['enrolled']!,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 24.h), // Responsive spacing
+                ]),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
